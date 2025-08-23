@@ -30,6 +30,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      # Step 3: Runs the Maven compile command
+      # Step 3: Runs the Maven compile command at the project root
       - name: Compile with Maven
-        run: mvn -B compile --file backend/pom.xml
+        run: mvn -B compile

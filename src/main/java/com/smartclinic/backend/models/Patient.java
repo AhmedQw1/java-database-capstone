@@ -1,6 +1,6 @@
 package com.smartclinic.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties; // Add this import
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
