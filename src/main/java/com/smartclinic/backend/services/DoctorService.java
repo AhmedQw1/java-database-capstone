@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -50,5 +51,12 @@ public class DoctorService {
 
         // For this project, we return the doctor's general availability.
         return doctor.getAvailableTimes();
+    }
+
+    /**
+     * Search for doctors by (partial) name, case-insensitive.
+     */
+    public List<Doctor> searchDoctorsByName(String name) {
+        return doctorRepository.findByNameContainingIgnoreCase(name);
     }
 }

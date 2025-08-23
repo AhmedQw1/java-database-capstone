@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - Smart Clinic</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container" style="max-width: 800px;">
+    <div class="header">
+        <h1>Patient Dashboard</h1>
+        <button id="logout-button" class="logout-button">Logout</button>
+    </div>
+    <div class="content">
+        <h2>Find a Doctor</h2>
+        <form id="search-form">
+            <div class="form-group">
+                <label for="doctor-name">Doctor Name</label>
+                <input type="search" id="doctor-name" placeholder="Enter doctor's name...">
+            </div>
+            <button type="submit">Search</button>
+        </form>
+        <div id="doctor-search-results">
+        </div>
+    </div>
+</div>
+<script src="patient.js"></script>
+</body>
+</html>

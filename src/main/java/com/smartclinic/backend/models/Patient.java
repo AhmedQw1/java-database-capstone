@@ -1,5 +1,6 @@
 package com.smartclinic.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties; // Add this import
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -10,10 +11,6 @@ import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 
-/**
- * Represents a patient registered at the clinic.
- * This class is a JPA entity mapped to the 'patients' table.
- */
 @Entity
 @Table(name = "patients")
 @Data
@@ -36,8 +33,8 @@ public class Patient {
     @Past(message = "Date of birth must be in the past.")
     private LocalDate dateOfBirth;
 
-    // Establishes a one-to-one relationship with the User entity.
-    // Each patient profile is linked to a single user account for login.
+    // --- THE FINAL FIX IS HERE ---
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;

@@ -71,3 +71,104 @@ button:hover {
     height: 20px;
     font-size: 0.9em;
 }
+
+/* Dashboard Specific Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.logout-button {
+    padding: 8px 16px;
+    width: auto; /* Override full width */
+    font-size: 14px;
+    background-color: #d9534f;
+}
+
+.logout-button:hover {
+    background-color: #c9302c;
+}
+
+.content {
+    text-align: left;
+}
+
+.message {
+    margin-top: 15px;
+    height: 20px;
+    font-weight: 500;
+}
+
+.message.success {
+    color: #5cb85c;
+}
+
+.message.error {
+    color: #d9534f;
+}
+/* Dashboard Specific Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.logout-button {
+    padding: 8px 16px;
+    width: auto; /* Override full width */
+    font-size: 14px;
+    background-color: #d9534f;
+}
+
+.logout-button:hover {
+    background-color: #c9302c;
+}
+
+.content {
+    text-align: left;
+}
+
+.message {
+    margin-top: 15px;
+    height: 20px;
+    font-weight: 500;
+}
+
+.message.success {
+    color: #5cb85c;
+}
+
+.message.error {
+    color: #d9534f;
+}
+/* Patient Dashboard Card Styles */
+.doctor-card {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.times-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.time-slot-button {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: #28a745;
+}
+
+.time-slot-button:hover {
+    background-color: #218838;
+}

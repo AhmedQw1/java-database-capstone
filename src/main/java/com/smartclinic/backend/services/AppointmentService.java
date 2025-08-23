@@ -1,13 +1,16 @@
 package com.smartclinic.backend.services;
 
 import com.smartclinic.backend.dto.AppointmentRequestDTO;
+import com.smartclinic.backend.dto.AppointmentResponseDTO;
 import com.smartclinic.backend.models.Appointment;
 import com.smartclinic.backend.models.Doctor;
 import com.smartclinic.backend.models.Patient;
+import com.smartclinic.backend.models.User;
 import com.smartclinic.backend.repositories.AppointmentRepository;
 import com.smartclinic.backend.repositories.DoctorRepository;
 import com.smartclinic.backend.repositories.PatientRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
@@ -33,13 +37,15 @@ public class AppointmentService {
      * Implements the booking method that saves an appointment.
      * It fetches the doctor and patient, creates a new appointment, and saves it.
      */
+// In AppointmentService.java
     @Transactional
-    public Appointment bookAppointment(AppointmentRequestDTO request) {
+    public Appointment bookAppointment(AppointmentRequestDTO request, Authentication authentication) {
+        User currentUser = (User) authentication.getPrincipal();
+        Patient patient = patientRepository.findByUserEmail(currentUser.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException("Patient profile not found for the current user."));
+
         Doctor doctor = doctorRepository.findById(request.doctorId())
                 .orElseThrow(() -> new EntityNotFoundException("Doctor not found with ID: " + request.doctorId()));
-
-        Patient patient = patientRepository.findById(request.patientId())
-                .orElseThrow(() -> new EntityNotFoundException("Patient not found with ID: " + request.patientId()));
 
         Appointment appointment = new Appointment();
         appointment.setDoctor(doctor);
@@ -53,12 +59,23 @@ public class AppointmentService {
 
     /**
      * Defines a method to retrieve appointments for a doctor on a specific date.
-     * It uses the custom repository method to find appointments within the date's time range.
+     * It converts Appointment entities into AppointmentResponseDTOs.
      */
-    public List<Appointment> getAppointmentsForDoctorOnDate(Long doctorId, LocalDate date) {
+    public List<AppointmentResponseDTO> getAppointmentsForDoctorOnDate(Long doctorId, LocalDate date) {
         LocalDateTime startOfDay = date.atStartOfDay();
         LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
 
-        return appointmentRepository.findByDoctorIdAndAppointmentTimeBetween(doctorId, startOfDay, endOfDay);
+        List<Appointment> appointments = appointmentRepository.findByDoctorIdAndAppointmentTimeBetween(doctorId, startOfDay, endOfDay);
+
+        // Convert the list of Appointment entities to a list of DTOs
+        return appointments.stream()
+                .map(app -> new AppointmentResponseDTO(
+                        app.getId(),
+                        app.getAppointmentTime(),
+                        app.getStatus(),
+                        app.getReason(),
+                        app.getPatient() != null ? app.getPatient().getName() : null
+                ))
+                .collect(Collectors.toList());
     }
 }
