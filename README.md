@@ -1,5 +1,14 @@
 # Smart Clinic Management System
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Java](https://img.shields.io/badge/Java-21-red.svg?logo=openjdk)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0-green.svg?logo=springboot)](https://spring.io/projects/spring-boot)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg?logo=mysql)](https://www.mysql.com/)
+[![Maven](https://img.shields.io/badge/Maven-Build-orange.svg?logo=apachemaven)](https://maven.apache.org/)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-blue.svg?logo=docker)](https://www.docker.com/)
+
+---
+
 A full-stack web application designed to streamline clinic operations, providing distinct, role-based portals for administrators, doctors, and patients. Built from the ground up with a robust Java Spring Boot backend and a dynamic vanilla JavaScript frontend, this project serves as a comprehensive demonstration of modern software engineering principles, from secure API design to containerization and CI/CD.
 
 ---
